@@ -1,6 +1,8 @@
 package com.alprael;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -12,17 +14,24 @@ public class FlappyBird implements ActionListener {
   public final int HEIGHT = 800, WIDTH = 800;
 
   public Renderer renderer;
+  public Rectangle bird;
 
   public FlappyBird() {
     JFrame jframe = new JFrame();
+
     Timer timer = new Timer(20, this);
+
     renderer = new Renderer();
+
     jframe.add(renderer);
+    jframe.setTitle("FlappyBird");
     jframe.setDefaultCloseOperation(jframe.EXIT_ON_CLOSE);
     jframe.setSize(WIDTH, HEIGHT);
     jframe.setVisible(true);
-    timer.start();
 
+    bird = new Rectangle(WIDTH/2-10, HEIGHT/2-10, 20, 20);
+
+    timer.start();
   }
 
   @Override
@@ -32,6 +41,17 @@ public class FlappyBird implements ActionListener {
   }
 
   public void repaint(Graphics g) {
+    g.setColor(Color.cyan);
+    g.fillRect(0,0,WIDTH, HEIGHT);
+
+    g.setColor(Color.orange);
+    g.fillRect(0, HEIGHT-120, WIDTH, 120);
+
+    g.setColor(Color.green);
+    g.fillRect(0, HEIGHT-120, WIDTH, 20);
+
+    g.setColor(Color.red);
+    g.fillRect(bird.x, bird.y, bird.width, bird.height);
 
   }
 
